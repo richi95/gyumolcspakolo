@@ -25,28 +25,23 @@ export default function FruitWrapper() {
   const fnContainer = (arr: string[]) => {
     const data: string[] = [...arr];
 
-    setContainer1(container1.filter((fr) => fr != containerFruit));
-    setContainer2(container2.filter((fr) => fr != containerFruit));
-    setContainer3(container3.filter((fr) => fr != containerFruit));
-
     fruitsArr.forEach((value) => {
       if (
         value.split("_")[0] == fruit ||
         (value == containerFruit && !data.includes(containerFruit))
       ) {
         data.push(value);
-        setDeactiveIndexes([...deactiveIndexes, active]);
       }
     });
     setContainerFruit("");
     if (arr.length == 2) {
       return arr;
     }
+    setDeactiveIndexes([...deactiveIndexes, active]);
+    setContainer1(container1.filter((fr) => fr != containerFruit));
+    setContainer2(container2.filter((fr) => fr != containerFruit));
+    setContainer3(container3.filter((fr) => fr != containerFruit));
     return data;
-  };
-
-  const handleFruit = (fruit: string) => {
-    setContainerFruit(fruit);
   };
 
   const handleContainer = (e: MouseEvent) => {
@@ -69,6 +64,7 @@ export default function FruitWrapper() {
   const handlePool = (group: string, index: number) => {
     setActive(index);
     setFruit(group.split("_")[0]);
+    setContainerFruit("");
   };
 
   return (
@@ -89,7 +85,7 @@ export default function FruitWrapper() {
                     width={200}
                     height={200}
                     alt=""
-                    onClick={() => handleFruit(fruit)}
+                    onClick={() => setContainerFruit(fruit)}
                   />
                 ))}
               </div>
@@ -107,7 +103,7 @@ export default function FruitWrapper() {
                     width={200}
                     height={200}
                     alt=""
-                    onClick={() => handleFruit(fruit)}
+                    onClick={() => setContainerFruit(fruit)}
                   />
                 ))}
               </div>
@@ -125,7 +121,7 @@ export default function FruitWrapper() {
                     width={200}
                     height={200}
                     alt=""
-                    onClick={() => handleFruit(fruit)}
+                    onClick={() => setContainerFruit(fruit)}
                   />
                 ))}
               </div>
